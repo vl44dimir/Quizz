@@ -13,21 +13,21 @@ DROP TABLE IF EXISTS `Quizz`.`Joueurs` ;
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Joueurs` (
   `idJoueurs` INT NOT NULL ,
   `Pseudo` VARCHAR(105) NOT NULL ,
-  `Résultat` TINYINT NOT NULL ,
+  `Resultat` TINYINT NOT NULL ,
   PRIMARY KEY (`idJoueurs`) )
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
--- Table `Quizz`.`Catégories`
+-- Table `Quizz`.`Categories`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Quizz`.`Catégories` ;
+DROP TABLE IF EXISTS `Quizz`.`Categories` ;
 
-CREATE  TABLE IF NOT EXISTS `Quizz`.`Catégories` (
-  `idCatégories` INT NOT NULL ,
+CREATE  TABLE IF NOT EXISTS `Quizz`.`Categories` (
+  `idCategories` INT NOT NULL ,
   `Nom` TEXT NOT NULL ,
-  PRIMARY KEY (`idCatégories`) )
-ENGINE = InnoDB;
+  PRIMARY KEY (`idCategories`) )
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
@@ -38,35 +38,35 @@ DROP TABLE IF EXISTS `Quizz`.`Question` ;
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Question` (
   `idQuestion` INT NOT NULL ,
   `Question` TEXT NOT NULL ,
-  `Fkcatégories` INT NOT NULL ,
+  `Fkcategories` INT NOT NULL ,
   PRIMARY KEY (`idQuestion`) ,
-  INDEX `fk_Question_catégories1_idx` (`Fkcatégories` ASC) ,
-  CONSTRAINT `fk_Question_catégories1`
-    FOREIGN KEY (`Fkcatégories` )
-    REFERENCES `Quizz`.`Catégories` (`idCatégories` )
+  INDEX `fk_Question_categories1_idx` (`Fkcategories` ASC) ,
+  CONSTRAINT `fk_Question_categories1`
+    FOREIGN KEY (`Fkcategories` )
+    REFERENCES `Quizz`.`Categories` (`idCategories` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
--- Table `Quizz`.`Réponse`
+-- Table `Quizz`.`Reponse`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Quizz`.`Réponse` ;
+DROP TABLE IF EXISTS `Quizz`.`Reponse` ;
 
-CREATE  TABLE IF NOT EXISTS `Quizz`.`Réponse` (
-  `idRéponse` INT NOT NULL ,
-  `Réponse` TEXT NOT NULL ,
+CREATE  TABLE IF NOT EXISTS `Quizz`.`Reponse` (
+  `idReponse` INT NOT NULL ,
+  `Reponse` TEXT NOT NULL ,
   `Bonne` TINYINT(1) NOT NULL ,
   `FkQuestion` INT NOT NULL ,
-  PRIMARY KEY (`idRéponse`) ,
-  INDEX `fk_Réponse_Question_idx` (`FkQuestion` ASC) ,
-  CONSTRAINT `fk_Réponse_Question`
+  PRIMARY KEY (`idReponse`) ,
+  INDEX `fk_Reponse_Question_idx` (`FkQuestion` ASC) ,
+  CONSTRAINT `fk_Reponse_Question`
     FOREIGN KEY (`FkQuestion` )
     REFERENCES `Quizz`.`Question` (`idQuestion` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 USE `Quizz` ;
 
