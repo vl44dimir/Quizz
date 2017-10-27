@@ -11,11 +11,11 @@ USE `Quizz` ;
 DROP TABLE IF EXISTS `Quizz`.`Joueurs` ;
 
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Joueurs` (
-  `idJoueurs` INT NOT NULL ,
+  `idJoueurs` INT NOT NULL AUTO_INCREMENT ,
   `Pseudo` VARCHAR(105) NOT NULL ,
   `Resultat` TINYINT NOT NULL ,
   PRIMARY KEY (`idJoueurs`) )
-ENGINE = INNODB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -24,10 +24,10 @@ ENGINE = INNODB;
 DROP TABLE IF EXISTS `Quizz`.`Categories` ;
 
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Categories` (
-  `idCategories` INT NOT NULL ,
+  `idCategories` INT NOT NULL AUTO_INCREMENT ,
   `Nom` TEXT NOT NULL ,
   PRIMARY KEY (`idCategories`) )
-ENGINE = INNODB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -36,17 +36,17 @@ ENGINE = INNODB;
 DROP TABLE IF EXISTS `Quizz`.`Question` ;
 
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Question` (
-  `idQuestion` INT NOT NULL ,
+  `idQuestion` INT NOT NULL AUTO_INCREMENT ,
   `Question` TEXT NOT NULL ,
   `Fkcategories` INT NOT NULL ,
   PRIMARY KEY (`idQuestion`) ,
-  INDEX `fk_Question_categories1_idx` (`Fkcategories` ASC) ,
-  CONSTRAINT `fk_Question_categories1`
+  INDEX `fk_Question_catégories1_idx` (`Fkcategories` ASC) ,
+  CONSTRAINT `fk_Question_catégories1`
     FOREIGN KEY (`Fkcategories` )
     REFERENCES `Quizz`.`Categories` (`idCategories` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = INNODB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -55,18 +55,18 @@ ENGINE = INNODB;
 DROP TABLE IF EXISTS `Quizz`.`Reponse` ;
 
 CREATE  TABLE IF NOT EXISTS `Quizz`.`Reponse` (
-  `idReponse` INT NOT NULL ,
-  `Reponse` TEXT NOT NULL ,
+  `idReponse` INT NOT NULL AUTO_INCREMENT ,
+  `Réponse` TEXT NOT NULL ,
   `Bonne` TINYINT(1) NOT NULL ,
   `FkQuestion` INT NOT NULL ,
   PRIMARY KEY (`idReponse`) ,
-  INDEX `fk_Reponse_Question_idx` (`FkQuestion` ASC) ,
-  CONSTRAINT `fk_Reponse_Question`
+  INDEX `fk_Réponse_Question_idx` (`FkQuestion` ASC) ,
+  CONSTRAINT `fk_Réponse_Question`
     FOREIGN KEY (`FkQuestion` )
     REFERENCES `Quizz`.`Question` (`idQuestion` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = INNODB;
+ENGINE = InnoDB;
 
 USE `Quizz` ;
 
