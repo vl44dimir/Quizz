@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace Moyenne
+namespace Quizz
 {
     class Connection_mySQL
     {
@@ -80,16 +80,53 @@ namespace Moyenne
         }
 
         //Insert statement
-        public void InsertJoueur()
+        public void InsertJoueur(string nomJoueur, int resultat)
+        {
+            connection.Open();
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "INSERT INTO Joueurs (Pseudo, Resultat) VALUES (@Pseudo, @Resultat)";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@Pseudo", nomJoueur);
+            cmd.Parameters.AddWithValue("@Resultat", resultat);
+
+            // Exécution de la commande SQL
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
+        public object TestPseudo(string nomJoueur)
         {
             connection.Open();
 
+            string sql = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
 
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+            object resultat = cmd.ExecuteScalar();
+
+            connection.Close();
+
+            return resultat;
+
+            
         }
-
         //Update statement
-        public void Update()
+        public void UpdateScore(string nomJoueur,int resultat)
         {
+            connection.Open();
+
+            string sql = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
+
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
         }
 
         //Delete statement
