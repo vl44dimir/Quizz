@@ -12,3 +12,15 @@ E:\Users\Rapha\Desktop\git\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuizz.r
 E:\Users\Rapha\Desktop\git\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.csproj.GenerateResource.Cache
 E:\Users\Rapha\Desktop\git\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.exe
 E:\Users\Rapha\Desktop\git\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.pdb
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.exe
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.pdb
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\bin\Debug\Quizz.exe
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\bin\Debug\Quizz.pdb
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\bin\Debug\MySql.Data.dll
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\bin\Debug\MySql.Data.Entity.dll
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\bin\Debug\MySql.Web.dll
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.csprojResolveAssemblyReference.cache
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.Properties.Resources.resources
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuizz.resources
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.csproj.GenerateResource.Cache
+P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuestion.resources

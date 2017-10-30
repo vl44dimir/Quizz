@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection_mySQL.cs" />
+    <Compile Include="Question.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Question.Designer.cs">
+      <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
     <Compile Include="quizz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Question.resx">
+      <DependentUpon>Question.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="quizz.resx">
       <DependentUpon>quizz.cs</DependentUpon>
     </EmbeddedResource>

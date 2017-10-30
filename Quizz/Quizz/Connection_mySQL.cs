@@ -103,9 +103,9 @@ namespace Quizz
         {
             connection.Open();
 
-            string sql = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
+            MySqlCommand cmd = this.connection.CreateCommand();
 
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
+            cmd.CommandText = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
 
             object resultat = cmd.ExecuteScalar();
 
@@ -115,23 +115,65 @@ namespace Quizz
 
             
         }
-        //Update statement
         public void UpdateScore(string nomJoueur,int resultat)
         {
             connection.Open();
+            
+            MySqlCommand cmd = this.connection.CreateCommand();
 
-            string sql = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
-
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
+            cmd.CommandText = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
 
             cmd.ExecuteNonQuery();
 
             connection.Close();
         }
 
-        //Delete statement
-        public void Delete()
+        public int countCategorie()
         {
+            int nombre;
+            object resultat;
+
+            connection.Open();
+
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            cmd.CommandText = "SELECT COUNT(Nom) FROM categories";
+
+            resultat = cmd.ExecuteScalar();
+
+            if (resultat!=null)
+            {
+                nombre = Convert.ToInt32(resultat);
+            }
+            else
+            {
+                 nombre = 0;
+            }
+
+            return nombre;
+
+
+        }
+
+        
+
+        public string selectQuestion()
+        {
+            object resultat;
+
+            connection.Open();
+
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            cmd.CommandText = "SELECT Reponse,Bonne,Question,Nom FROM categories INNER JOIN question ON idCategories = FKcategories INNER JOIN reponse ON idQuestion = FkQuestion";
+
+            resultat = cmd.ExecuteNonQuery();
+            return "";
+        }
+
+        public void selectReponse()
+        {
+
         }
     }
 }

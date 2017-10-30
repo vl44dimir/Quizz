@@ -15,7 +15,7 @@ namespace Quizz
         public frmQuizz()
         {
             InitializeComponent();
-            cmdDebut.Enabled = false;
+            cmdDebut.Enabled = true;
         }
 
         private void cmdAjouterLePseudo_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace Quizz
             }
             else
             {
-                string message = "le pseudo " + txtPseudo.Text + " n'est pas disponible veuillez sélectionner un autre pseudo";
+                string message = "le pseudo " + txtPseudo.Text + " n'est plus disponible, merci de sélectionner un autre pseudo";
                 string caption = "Pseudo invalide";
                 MessageBoxButtons bouton = MessageBoxButtons.OK;
                 MessageBox.Show(message, caption, bouton, MessageBoxIcon.Error);
@@ -41,8 +41,13 @@ namespace Quizz
 
         private void cmdDebut_Click(object sender, EventArgs e)
         {
+
+
+
             Connection_mySQL bdd = new Connection_mySQL();
-            bdd.UpdateScore(txtPseudo.Text, 18);
+            bdd.selectQuestion();
+            /*bdd.UpdateScore(txtPseudo.Text, 18);
+            txtPseudo.Text = "";*/
         }
     }
 }
