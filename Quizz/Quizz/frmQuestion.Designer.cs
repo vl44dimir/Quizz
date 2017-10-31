@@ -32,12 +32,13 @@
             this.cmdReponseA = new System.Windows.Forms.Button();
             this.cmdReponseB = new System.Windows.Forms.Button();
             this.cmdReponseC = new System.Windows.Forms.Button();
+            this.lblCat = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblQuestion
             // 
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Location = new System.Drawing.Point(75, 23);
+            this.lblQuestion.Location = new System.Drawing.Point(75, 34);
             this.lblQuestion.Name = "lblQuestion";
             this.lblQuestion.Size = new System.Drawing.Size(0, 13);
             this.lblQuestion.TabIndex = 0;
@@ -66,11 +67,20 @@
             this.cmdReponseC.TabIndex = 3;
             this.cmdReponseC.UseVisualStyleBackColor = true;
             // 
+            // lblCat
+            // 
+            this.lblCat.AutoSize = true;
+            this.lblCat.Location = new System.Drawing.Point(75, 9);
+            this.lblCat.Name = "lblCat";
+            this.lblCat.Size = new System.Drawing.Size(0, 13);
+            this.lblCat.TabIndex = 4;
+            // 
             // frmQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 247);
+            this.Controls.Add(this.lblCat);
             this.Controls.Add(this.cmdReponseC);
             this.Controls.Add(this.cmdReponseB);
             this.Controls.Add(this.cmdReponseA);
@@ -89,5 +99,6 @@
         private System.Windows.Forms.Button cmdReponseA;
         private System.Windows.Forms.Button cmdReponseB;
         private System.Windows.Forms.Button cmdReponseC;
+        private System.Windows.Forms.Label lblCat;
     }
 }

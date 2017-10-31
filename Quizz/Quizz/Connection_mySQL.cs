@@ -105,7 +105,7 @@ namespace Quizz
 
             MySqlCommand cmd = this.connection.CreateCommand();
 
-            cmd.CommandText = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
+            cmd.CommandText = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE '" + nomJoueur + "'";
 
             object resultat = cmd.ExecuteScalar();
 
@@ -121,7 +121,7 @@ namespace Quizz
             
             MySqlCommand cmd = this.connection.CreateCommand();
 
-            cmd.CommandText = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE " + "'" + nomJoueur + "'";
+            cmd.CommandText = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE '" + nomJoueur + "'";
 
             cmd.ExecuteNonQuery();
 
@@ -157,23 +157,34 @@ namespace Quizz
 
         
 
-        public string selectQuestion()
+        public List<Question> selectQuestion()
         {
-            object resultat;
-
+            List<Question> lstQuestions = new List<Question>();
             connection.Open();
-
+            
+            
             MySqlCommand cmd = this.connection.CreateCommand();
 
-            cmd.CommandText = "SELECT Reponse,Bonne,Question,Nom FROM categories INNER JOIN question ON idCategories = FKcategories INNER JOIN reponse ON idQuestion = FkQuestion";
+            cmd.CommandText = "SELECT Nom,Question,Reponse_1,Reponse_2,Reponse_3,Bonne FROM question INNER JOIN categories ON idCategories = Fkcategories ORDER BY idQuestion";
 
-            resultat = cmd.ExecuteNonQuery();
-            return "";
-        }
+            MySqlDataReader question = cmd.ExecuteReader();
+            
+            while (question.Read())
+            {
+                Question quest = new Question();
+                quest.Categories = Convert.ToString(question[0]);
+                quest.NomQuestion = Convert.ToString(question[1]);
+                quest.ReponseA = Convert.ToString(question[2]);
+                quest.ReponseB = Convert.ToString(question[3]);
+                quest.ReponseC = Convert.ToString(question[4]);
+                quest.BonneReponse = Convert.ToInt32(question[5]);
+                lstQuestions.Add(quest);
+            }
+            question.Close();
 
-        public void selectReponse()
-        {
-
+            
+            connection.Close();
+            return lstQuestions;
         }
     }
 }

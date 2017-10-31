@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Quizz
 {
-    public partial class frmQuestion : Form
+    public class Question
     {
-        public frmQuestion()
-        {
-            InitializeComponent();
-        }
-
-        private void frmQuestion_Load(object sender, EventArgs e)
+        public Question()
         {
 
         }
+        public string Categories { set; get; }
+        public string NomQuestion { set; get; }
+        public string ReponseA { set; get; }
+        public string ReponseB { set; get; }
+        public string ReponseC { set; get; }
+        public int BonneReponse { set; get; }
     }
 }

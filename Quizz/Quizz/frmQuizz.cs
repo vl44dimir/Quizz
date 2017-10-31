@@ -42,10 +42,9 @@ namespace Quizz
         private void cmdDebut_Click(object sender, EventArgs e)
         {
 
-
-
-            Connection_mySQL bdd = new Connection_mySQL();
-            bdd.selectQuestion();
+            
+            frmQuestion question = new frmQuestion();
+            question.ShowDialog();
             /*bdd.UpdateScore(txtPseudo.Text, 18);
             txtPseudo.Text = "";*/
         }
