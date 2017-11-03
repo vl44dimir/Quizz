@@ -12,10 +12,13 @@ namespace Quizz
 {
     public partial class frmQuizz : Form
     {
+
+        Joueur joueur; 
         public frmQuizz()
         {
             InitializeComponent();
-            cmdDebut.Enabled = true;
+            cmdDebut.Enabled = false;
+            
         }
 
         private void cmdAjouterLePseudo_Click(object sender, EventArgs e)
@@ -25,6 +28,8 @@ namespace Quizz
             resultat = bdd.TestPseudo(txtPseudo.Text);
             if (resultat == null)
             {
+                joueur = new Joueur();
+                joueur.Pseudo = txtPseudo.Text;
                 bdd.InsertJoueur(txtPseudo.Text, 0);
                 cmdAjouterLePseudo.Enabled = false;
                 cmdDebut.Enabled = true;
@@ -41,12 +46,17 @@ namespace Quizz
 
         private void cmdDebut_Click(object sender, EventArgs e)
         {
+            Connection_mySQL bdd = new Connection_mySQL();
 
-            
-            frmQuestion question = new frmQuestion();
+            frmQuestion question = new frmQuestion(joueur);
+
             question.ShowDialog();
-            /*bdd.UpdateScore(txtPseudo.Text, 18);
-            txtPseudo.Text = "";*/
+
+            bdd.UpdateScore(joueur.Pseudo, joueur.Score);
+            txtPseudo.Text = "";
+            
+            cmdAjouterLePseudo.Enabled = true;
+            cmdDebut.Enabled = false;
         }
     }
 }

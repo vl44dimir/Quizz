@@ -15,7 +15,7 @@ CREATE  TABLE IF NOT EXISTS `Quizz`.`Joueurs` (
   `Pseudo` VARCHAR(105) NOT NULL ,
   `Resultat` TINYINT NOT NULL ,
   PRIMARY KEY (`idJoueurs`) )
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
@@ -27,7 +27,7 @@ CREATE  TABLE IF NOT EXISTS `Quizz`.`Categories` (
   `idCategories` INT NOT NULL AUTO_INCREMENT ,
   `Nom` TEXT NOT NULL ,
   PRIMARY KEY (`idCategories`) )
-ENGINE = InnoDB;
+ENGINE = INNODB;
 
 
 -- -----------------------------------------------------
@@ -50,9 +50,7 @@ CREATE  TABLE IF NOT EXISTS `Quizz`.`Question` (
     REFERENCES `Quizz`.`Categories` (`idCategories` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-USE `Quizz` ;
+ENGINE = INNODB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
