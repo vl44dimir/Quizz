@@ -87,11 +87,11 @@ namespace Quizz
             MySqlCommand cmd = this.connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "INSERT INTO Joueurs (Pseudo, Resultat) VALUES (@Pseudo, @Resultat)";
+            cmd.CommandText = "INSERT INTO Joueurs (Pseudo, Score) VALUES (@Pseudo, @Score)";
 
             // utilisation de l'objet contact passé en paramètre
             cmd.Parameters.AddWithValue("@Pseudo", nomJoueur);
-            cmd.Parameters.AddWithValue("@Resultat", resultat);
+            cmd.Parameters.AddWithValue("@Score", resultat);
 
             // Exécution de la commande SQL
             cmd.ExecuteNonQuery();
