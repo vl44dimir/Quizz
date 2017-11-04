@@ -24,3 +24,4 @@ P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Qui
 P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuizz.resources
 P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.csproj.GenerateResource.Cache
 P:\CPNV-ste-croix\2eme annee\trimestre 1\ICT-226A\Quizz\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuestion.resources
+E:\Users\Rapha\Desktop\git\Quizz-ICT-226A\Quizz\Quizz\obj\Debug\Quizz.frmQuestion.resources

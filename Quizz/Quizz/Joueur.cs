@@ -15,6 +15,12 @@ namespace Quizz
 
         public string Pseudo { get; set; }
         public int Score { get; set; }
+
+        public override string ToString()
+        {
+            string chaine = Pseudo + " " + Score;
+            return chaine;
+        }
     }
 
     

@@ -121,7 +121,7 @@ namespace Quizz
             
             MySqlCommand cmd = this.connection.CreateCommand();
 
-            cmd.CommandText = "UPDATE joueurs SET Resultat = " + resultat + " WHERE Pseudo LIKE '" + nomJoueur + "'";
+            cmd.CommandText = "UPDATE joueurs SET Score = " + resultat + " WHERE Pseudo LIKE '" + nomJoueur + "'";
 
             cmd.ExecuteNonQuery();
 
@@ -155,8 +155,6 @@ namespace Quizz
 
         }
 
-        
-
         public List<Question> selectQuestion()
         {
             List<Question> lstQuestions = new List<Question>();
@@ -181,8 +179,6 @@ namespace Quizz
                 lstQuestions.Add(quest);
             }
             question.Close();
-
-            
             connection.Close();
             return lstQuestions;
         }

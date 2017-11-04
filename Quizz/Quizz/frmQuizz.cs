@@ -58,5 +58,7 @@ namespace Quizz
             cmdAjouterLePseudo.Enabled = true;
             cmdDebut.Enabled = false;
         }
+
+        
     }
 }

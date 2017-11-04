@@ -35,14 +35,14 @@
             // 
             // txtPseudo
             // 
-            this.txtPseudo.Location = new System.Drawing.Point(77, 32);
+            this.txtPseudo.Location = new System.Drawing.Point(87, 30);
             this.txtPseudo.Name = "txtPseudo";
             this.txtPseudo.Size = new System.Drawing.Size(100, 20);
             this.txtPseudo.TabIndex = 2;
             // 
             // cmdAjouterLePseudo
             // 
-            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(78, 75);
+            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(88, 73);
             this.cmdAjouterLePseudo.Name = "cmdAjouterLePseudo";
             this.cmdAjouterLePseudo.Size = new System.Drawing.Size(99, 35);
             this.cmdAjouterLePseudo.TabIndex = 3;
@@ -52,7 +52,7 @@
             // 
             // cmdDebut
             // 
-            this.cmdDebut.Location = new System.Drawing.Point(44, 162);
+            this.cmdDebut.Location = new System.Drawing.Point(54, 160);
             this.cmdDebut.Name = "cmdDebut";
             this.cmdDebut.Size = new System.Drawing.Size(162, 81);
             this.cmdDebut.TabIndex = 4;
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(261, 360);
+            this.ClientSize = new System.Drawing.Size(276, 299);
             this.Controls.Add(this.cmdDebut);
             this.Controls.Add(this.cmdAjouterLePseudo);
             this.Controls.Add(this.txtPseudo);
