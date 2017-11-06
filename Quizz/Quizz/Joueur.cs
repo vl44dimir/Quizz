@@ -21,6 +21,7 @@ namespace Quizz
             string chaine = Pseudo + " " + Score;
             return chaine;
         }
+
     }
 
     

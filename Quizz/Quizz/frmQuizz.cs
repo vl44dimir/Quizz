@@ -59,6 +59,19 @@ namespace Quizz
             cmdDebut.Enabled = false;
         }
 
-        
+        private void frmQuizz_Load(object sender, EventArgs e)
+        {
+            Connection_mySQL bdd = new Connection_mySQL();
+            List<Joueur> lstJoueur =  bdd.selectJoueur();
+
+            if (lstJoueur.Count > 0)
+            {
+                lstClassement.Items.Clear();
+                foreach (Joueur j in lstJoueur)
+                {
+                    lstClassement.Items.Add(j.ToString());
+                }
+            }
+        }
     }
 }

@@ -155,6 +155,30 @@ namespace Quizz
 
         }
 
+        public List<Joueur> selectJoueur()
+        {
+            List<Joueur> lstJoueur = new List<Joueur>();
+
+            connection.Open();
+
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            cmd.CommandText = "SELECT Pseudo, Score FROM joueurs ORDER BY score DESC LIMIT 16";
+
+            MySqlDataReader j = cmd.ExecuteReader();
+
+            while (j.Read())
+            {
+                Joueur joueurs = new Joueur();
+                joueurs.Pseudo = Convert.ToString(j[0]);
+                joueurs.Score = Convert.ToInt32(j[1]);
+                lstJoueur.Add(joueurs);
+            }
+            j.Close();
+            connection.Close();
+            return lstJoueur;
+        }
+
         public List<Question> selectQuestion()
         {
             List<Question> lstQuestions = new List<Question>();
