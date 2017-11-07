@@ -114,18 +114,18 @@
             this.lblTemps.AutoSize = true;
             this.lblTemps.Location = new System.Drawing.Point(229, 188);
             this.lblTemps.Name = "lblTemps";
-            this.lblTemps.Size = new System.Drawing.Size(69, 13);
+            this.lblTemps.Size = new System.Drawing.Size(78, 13);
             this.lblTemps.TabIndex = 7;
-            this.lblTemps.Text = "Bar du temps";
+            this.lblTemps.Text = "Barre du temps";
             // 
             // lblBQ
             // 
             this.lblBQ.AutoSize = true;
             this.lblBQ.Location = new System.Drawing.Point(229, 268);
             this.lblBQ.Name = "lblBQ";
-            this.lblBQ.Size = new System.Drawing.Size(86, 13);
+            this.lblBQ.Size = new System.Drawing.Size(95, 13);
             this.lblBQ.TabIndex = 8;
-            this.lblBQ.Text = "Bar des question";
+            this.lblBQ.Text = "Barre des question";
             // 
             // frmQuestion
             // 
