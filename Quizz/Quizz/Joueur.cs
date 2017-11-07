@@ -18,7 +18,7 @@ namespace Quizz
 
         public override string ToString()
         {
-            string chaine = Pseudo + " " + Score;
+            string chaine = Pseudo + "- Score: " + Score;
             return chaine;
         }
 

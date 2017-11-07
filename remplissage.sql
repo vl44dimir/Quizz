@@ -13,4 +13,7 @@ INSERT INTO question (Question,Reponse_1,Reponse_2,Reponse_3,Bonne,Fkcategories)
 ("Quelle est la valeur de PI arrondi à deux chiffres ?","3.14","3.13","3.15",1,(SELECT idCategories FROM categories WHERE Nom = "Math")),
 ("Que fait la ligne de code suivante : mavariable++ ?","Incrémente la variable 'mavariable' de 1","Décrémente la variable 'mavariable' de 1","Ne fait rien",1,(SELECT idCategories FROM categories WHERE Nom = "Programmation")),
 ("En quelle année le Titanic a coulé ?","1911","1912","1913",2,(SELECT idCategories FROM categories WHERE Nom = "Culture Général")),
-("En quelle année a été adopté le drapeau actuel de la suisse ?","1840","1841","1842",1,(SELECT idCategories FROM categories WHERE Nom = "Culture Général"));
+("En quelle année a été adopté le drapeau actuel de la suisse ?","1840","1841","1842",1,(SELECT idCategories FROM categories WHERE Nom = "Culture Général")),
+("quelle est la grande question sur la vie, l'univers et le reste ?","42.2","42","42.42",2,(SELECT idCategories FROM categories WHERE Nom = "Culture Général")),
+("Qu’est-ce qui est petit et marron ?","un marron","un petit pois","une châtaigne",1,(SELECT idCategories FROM categories WHERE Nom = "Culture Général")),
+("Qui est célèbre pour la phrase 'C'est pas faux'","Roi Arthur","Perceval","Léodagan",2,(SELECT idCategories FROM categories WHERE Nom = "Culture Général"));

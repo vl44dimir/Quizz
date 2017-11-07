@@ -54,7 +54,17 @@ namespace Quizz
 
             bdd.UpdateScore(joueur.Pseudo, joueur.Score);
             txtPseudo.Text = "";
-            
+            List<Joueur> lstJoueur = bdd.selectJoueur();
+
+            if (lstJoueur.Count > 0)
+            {
+                lstClassement.Items.Clear();
+                foreach (Joueur j in lstJoueur)
+                {
+                    lstClassement.Items.Add(j.ToString());
+                }
+            }
+            lstJoueur.Clear();
             cmdAjouterLePseudo.Enabled = true;
             cmdDebut.Enabled = false;
         }
