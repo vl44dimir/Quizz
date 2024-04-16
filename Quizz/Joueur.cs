@@ -15,6 +15,7 @@ namespace Quizz
 
         public string Pseudo { get; set; }
         public int Score { get; set; }
+        public string Password { get; set; } // Ajout du mot de passe
 
         public override string ToString()
         {
