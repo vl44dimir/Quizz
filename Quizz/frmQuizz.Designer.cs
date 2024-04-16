@@ -36,16 +36,18 @@
             // 
             // txtPseudo
             // 
-            this.txtPseudo.Location = new System.Drawing.Point(287, 28);
+            this.txtPseudo.Location = new System.Drawing.Point(574, 54);
+            this.txtPseudo.Margin = new System.Windows.Forms.Padding(6);
             this.txtPseudo.Name = "txtPseudo";
-            this.txtPseudo.Size = new System.Drawing.Size(100, 20);
+            this.txtPseudo.Size = new System.Drawing.Size(196, 31);
             this.txtPseudo.TabIndex = 2;
             // 
             // cmdAjouterLePseudo
             // 
-            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(288, 71);
+            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(576, 137);
+            this.cmdAjouterLePseudo.Margin = new System.Windows.Forms.Padding(6);
             this.cmdAjouterLePseudo.Name = "cmdAjouterLePseudo";
-            this.cmdAjouterLePseudo.Size = new System.Drawing.Size(99, 35);
+            this.cmdAjouterLePseudo.Size = new System.Drawing.Size(198, 67);
             this.cmdAjouterLePseudo.TabIndex = 3;
             this.cmdAjouterLePseudo.Text = "Ajouter le Pseudo";
             this.cmdAjouterLePseudo.UseVisualStyleBackColor = true;
@@ -53,9 +55,10 @@
             // 
             // cmdDebut
             // 
-            this.cmdDebut.Location = new System.Drawing.Point(254, 158);
+            this.cmdDebut.Location = new System.Drawing.Point(508, 304);
+            this.cmdDebut.Margin = new System.Windows.Forms.Padding(6);
             this.cmdDebut.Name = "cmdDebut";
-            this.cmdDebut.Size = new System.Drawing.Size(162, 81);
+            this.cmdDebut.Size = new System.Drawing.Size(324, 156);
             this.cmdDebut.TabIndex = 4;
             this.cmdDebut.Text = "Début du quizz";
             this.cmdDebut.UseVisualStyleBackColor = true;
@@ -64,20 +67,23 @@
             // lstClassement
             // 
             this.lstClassement.FormattingEnabled = true;
-            this.lstClassement.Location = new System.Drawing.Point(29, 14);
+            this.lstClassement.ItemHeight = 25;
+            this.lstClassement.Location = new System.Drawing.Point(58, 27);
+            this.lstClassement.Margin = new System.Windows.Forms.Padding(6);
             this.lstClassement.Name = "lstClassement";
-            this.lstClassement.Size = new System.Drawing.Size(177, 225);
+            this.lstClassement.Size = new System.Drawing.Size(350, 429);
             this.lstClassement.TabIndex = 5;
             // 
             // frmQuizz
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 299);
+            this.ClientSize = new System.Drawing.Size(1019, 755);
             this.Controls.Add(this.lstClassement);
             this.Controls.Add(this.cmdDebut);
             this.Controls.Add(this.cmdAjouterLePseudo);
             this.Controls.Add(this.txtPseudo);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "frmQuizz";
             this.Text = "Quizz";
             this.Load += new System.EventHandler(this.frmQuizz_Load);

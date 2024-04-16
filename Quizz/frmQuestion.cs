@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,8 @@ namespace Quizz
         int countTimer1s = 0;
         List<Question> lstquest;
         Joueur joueur;
+        private bool isPaused;
+
         public frmQuestion(Joueur joueur)
         {
             InitializeComponent();
@@ -61,7 +64,7 @@ namespace Quizz
             tmr1s.Start();
         }
 
-        
+
 
         private void cmdReponseA_Click(object sender, EventArgs e)
         {
@@ -121,7 +124,7 @@ namespace Quizz
         {
             if (countTimer0_5s < 6)
             {
-                if (countTimer0_5s%2 == 0)
+                if (countTimer0_5s % 2 == 0)
                 {
                     switch (bonneReponseQ)
                     {
@@ -140,7 +143,7 @@ namespace Quizz
                 }
                 else
                 {
-                    
+
                     switch (bonneReponseQ)
                     {
                         case 1:
@@ -183,9 +186,9 @@ namespace Quizz
                 countTimer1s = 0;
                 tmr1s.Stop();
                 tmr1s.Interval = 1000;
-                
+
                 if (bonneReponse == 1)
-                { 
+                {
                     score++;
                     joueur.Score = score;
                 }
@@ -217,7 +220,56 @@ namespace Quizz
             {
                 countTimer1s++;
                 prgTemps.Increment(1);
-            }            
+            }
         }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            if (!isPaused)
+            {
+                // Mettre en pause le quiz
+                isPaused = true;
+                btnPause.Text = "Reprendre";
+                tmr1s.Stop(); // Arrête le timer
+                tmr0_5s.Stop(); // Arrête le timer
+                // Code pour mettre en pause le minutage et la progression des questions
+                Console.WriteLine("Le quiz est en pause.");
+            }
+            else
+            {
+                // Reprendre le quiz
+                isPaused = false;
+                btnPause.Text = "PAUSE";
+                tmr1s.Start(); // Reprend le timer
+                // Code pour reprendre le minutage et la progression des questions
+                Console.WriteLine("Le quiz a repris.");
+            }
+        }
+
+        private void btnExtractQuizz_Click(object sender, EventArgs e)
+        {
+            // Assurez-vous que la liste 'lstquest' contient les données que vous souhaitez exporter.
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+            saveFileDialog.Title = "Export Quiz as CSV";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
+                {
+                    // Écrire les en-têtes de colonnes
+                    sw.WriteLine("Question,Answer,Options"); // Adaptez ces en-têtes aux données de votre quiz
+
+                    // Écrire les données
+                    foreach (var quest in lstquest)
+                    {
+                        // Adaptez cette ligne selon votre structure de données 'Question'
+                        sw.WriteLine($"{quest.NomQuestion},{quest.BonneReponse},{quest.ReponseA};{quest.ReponseB};{quest.ReponseC}");
+                    }
+                }
+            }
+        }
+
+
     }
 }

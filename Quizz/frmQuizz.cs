@@ -13,7 +13,9 @@ namespace Quizz
     public partial class frmQuizz : Form
     {
 
-        Joueur joueur; 
+        Joueur joueur;
+        
+
         public frmQuizz()
         {
             InitializeComponent();
@@ -93,5 +95,7 @@ namespace Quizz
                 }
             }
         }
+
+       
     }
 }
