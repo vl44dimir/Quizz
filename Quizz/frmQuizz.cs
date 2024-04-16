@@ -50,38 +50,50 @@ namespace Quizz
 
         private void cmdDebut_Click(object sender, EventArgs e)
         {
-            joueur.Pseudo = txtPseudo.Text; // Le pseudo est saisi ici
+            Connection_mySQL bdd = new Connection_mySQL();
+
             frmQuestion question = new frmQuestion(joueur);
+
             question.ShowDialog();
 
-            connection.UpdateScore(joueur.Pseudo, joueur.Score);
+            bdd.UpdateScore(joueur.Pseudo, joueur.Score);
             txtPseudo.Text = "";
-            List<Joueur> lstJoueur = connection.selectJoueur();
+            List<Joueur> lstJoueur = bdd.selectJoueur();
 
             if (lstJoueur.Count > 0)
             {
-                lstClassement.Items.Clear();
+                Classement.Items.Clear();
                 foreach (Joueur j in lstJoueur)
                 {
-                    lstClassement.Items.Add(j.ToString());
+                    Classement.Items.Add(j.ToString());
                 }
             }
             lstJoueur.Clear();
             cmdAjouterLePseudo.Enabled = true;
             cmdDebut.Enabled = false;
         }
- 
+
         private void frmQuizz_Load(object sender, EventArgs e)
         {
             List<Joueur> lstJoueur = connection.selectJoueur();
             if (lstJoueur.Count > 0)
             {
-                lstClassement.Items.Clear();
+                Classement.Items.Clear();
                 foreach (Joueur j in lstJoueur)
                 {
-                    lstClassement.Items.Add(j.ToString());
+                    Classement.Items.Add(j.ToString());
                 }
             }
+        }
+
+        private void txtPseudo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstClassement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Quizz
         private TextBox txtPassword;
         private Button cmdAjouterLePseudo;
         private Button cmdSignUp;
-        private ListBox lstClassement;
+        private ListBox Classement;
 
         protected override void Dispose(bool disposing)
         {
@@ -26,8 +26,9 @@ namespace Quizz
             this.txtPseudo = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.cmdAjouterLePseudo = new System.Windows.Forms.Button();
+            this.cmdDebut = new System.Windows.Forms.Button();
             this.cmdSignUp = new System.Windows.Forms.Button();
-            this.lstClassement = new System.Windows.Forms.ListBox();
+            this.Classement = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -38,6 +39,7 @@ namespace Quizz
             this.txtPseudo.Name = "txtPseudo";
             this.txtPseudo.Size = new System.Drawing.Size(100, 22);
             this.txtPseudo.TabIndex = 0;
+            this.txtPseudo.TextChanged += new System.EventHandler(this.txtPseudo_TextChanged);
             // 
             // txtPassword
             // 
@@ -53,12 +55,23 @@ namespace Quizz
             this.cmdAjouterLePseudo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmdAjouterLePseudo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.cmdAjouterLePseudo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(270, 219);
+            this.cmdAjouterLePseudo.Location = new System.Drawing.Point(270, 152);
             this.cmdAjouterLePseudo.Name = "cmdAjouterLePseudo";
-            this.cmdAjouterLePseudo.Size = new System.Drawing.Size(208, 35);
+            this.cmdAjouterLePseudo.Size = new System.Drawing.Size(208, 102);
             this.cmdAjouterLePseudo.TabIndex = 2;
             this.cmdAjouterLePseudo.Text = "Jouer";
             this.cmdAjouterLePseudo.UseVisualStyleBackColor = false;
+            this.cmdAjouterLePseudo.Click += new System.EventHandler(this.cmdDebut_Click);
+            // 
+            // cmdDebut
+            // 
+            this.cmdDebut.Location = new System.Drawing.Point(293, 163);
+            this.cmdDebut.Name = "cmdDebut";
+            this.cmdDebut.Size = new System.Drawing.Size(162, 81);
+            this.cmdDebut.TabIndex = 4;
+            this.cmdDebut.Text = "Début du quizz";
+            this.cmdDebut.UseVisualStyleBackColor = true;
+            this.cmdDebut.Click += new System.EventHandler(this.cmdDebut_Click);
             // 
             // cmdSignUp
             // 
@@ -72,13 +85,15 @@ namespace Quizz
             this.cmdSignUp.UseVisualStyleBackColor = false;
             this.cmdSignUp.Click += new System.EventHandler(this.cmdAjouterLePseudo_Click);
             // 
-            // lstClassement
+            // Classement
             // 
-            this.lstClassement.ItemHeight = 16;
-            this.lstClassement.Location = new System.Drawing.Point(31, 26);
-            this.lstClassement.Name = "lstClassement";
-            this.lstClassement.Size = new System.Drawing.Size(177, 228);
-            this.lstClassement.TabIndex = 4;
+            this.Classement.BackColor = System.Drawing.Color.Gainsboro;
+            this.Classement.ItemHeight = 16;
+            this.Classement.Location = new System.Drawing.Point(37, 26);
+            this.Classement.Name = "Classement";
+            this.Classement.Size = new System.Drawing.Size(177, 228);
+            this.Classement.TabIndex = 4;
+            this.Classement.SelectedIndexChanged += new System.EventHandler(this.lstClassement_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -109,8 +124,9 @@ namespace Quizz
             this.Controls.Add(this.txtPseudo);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.cmdAjouterLePseudo);
+            this.Controls.Add(this.cmdDebut);
             this.Controls.Add(this.cmdSignUp);
-            this.Controls.Add(this.lstClassement);
+            this.Controls.Add(this.Classement);
             this.Name = "frmQuizz";
             this.Text = "Quizz";
             this.ResumeLayout(false);
@@ -120,6 +136,7 @@ namespace Quizz
 
         private Label label1;
         private Label label2;
+        private System.Windows.Forms.Button cmdDebut;
     }
 }
 
