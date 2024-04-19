@@ -144,28 +144,32 @@ namespace Quizz
             // 
             // btnPause
             // 
+            this.btnPause.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnPause.Location = new System.Drawing.Point(66, 13);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(286, 49);
             this.btnPause.TabIndex = 9;
             this.btnPause.Text = "PAUSE";
-            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.UseVisualStyleBackColor = false;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnExtractQuizz
             // 
+            this.btnExtractQuizz.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnExtractQuizz.Location = new System.Drawing.Point(698, 13);
             this.btnExtractQuizz.Name = "btnExtractQuizz";
             this.btnExtractQuizz.Size = new System.Drawing.Size(286, 49);
             this.btnExtractQuizz.TabIndex = 11;
             this.btnExtractQuizz.Text = "Extraire le quizz";
-            this.btnExtractQuizz.UseVisualStyleBackColor = true;
+            this.btnExtractQuizz.UseVisualStyleBackColor = false;
             this.btnExtractQuizz.Click += new System.EventHandler(this.btnExtractQuizz_Click);
             // 
             // frmQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImage = global::Quizz.Properties.Resources.fondpoint__3_;
             this.ClientSize = new System.Drawing.Size(1000, 656);
             this.Controls.Add(this.btnExtractQuizz);
             this.Controls.Add(this.btnPause);

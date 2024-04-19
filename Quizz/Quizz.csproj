@@ -113,6 +113,27 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fejap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\18129294.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\point.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondpoint.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondpoint %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondpoint %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondpoint %283%29.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,7 +12,6 @@ using System.Windows.Forms;
 //commentaire
 namespace Quizz
 {
-
     public partial class frmQuestion : Form
     {
         //déclaration des variables globales
@@ -63,8 +62,6 @@ namespace Quizz
             prgQuestion.Increment(1);
             tmr1s.Start();
         }
-
-
 
         private void cmdReponseA_Click(object sender, EventArgs e)
         {
@@ -131,11 +128,9 @@ namespace Quizz
                         case 1:
                             cmdReponseA.Enabled = false;
                             break;
-
                         case 2:
                             cmdReponseB.Enabled = false;
                             break;
-
                         case 3:
                             cmdReponseC.Enabled = false;
                             break;
@@ -143,17 +138,14 @@ namespace Quizz
                 }
                 else
                 {
-
                     switch (bonneReponseQ)
                     {
                         case 1:
                             cmdReponseA.Enabled = true;
                             break;
-
                         case 2:
                             cmdReponseB.Enabled = true;
                             break;
-
                         case 3:
                             cmdReponseC.Enabled = true;
                             break;
@@ -232,7 +224,6 @@ namespace Quizz
                 btnPause.Text = "Reprendre";
                 tmr1s.Stop(); // Arrête le timer
                 tmr0_5s.Stop(); // Arrête le timer
-                // Code pour mettre en pause le minutage et la progression des questions
                 Console.WriteLine("Le quiz est en pause.");
             }
             else
@@ -241,35 +232,29 @@ namespace Quizz
                 isPaused = false;
                 btnPause.Text = "PAUSE";
                 tmr1s.Start(); // Reprend le timer
-                // Code pour reprendre le minutage et la progression des questions
                 Console.WriteLine("Le quiz a repris.");
             }
         }
 
         private void btnExtractQuizz_Click(object sender, EventArgs e)
         {
-            // Assurez-vous que la liste 'lstquest' contient les données que vous souhaitez exporter.
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
-            saveFileDialog.Title = "Export Quiz as CSV";
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+            saveFileDialog.Title = "Export Quiz as Text";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
                 {
-                    // Écrire les en-têtes de colonnes
-                    sw.WriteLine("Question,Answer,Options"); // Adaptez ces en-têtes aux données de votre quiz
-
-                    // Écrire les données
                     foreach (var quest in lstquest)
                     {
-                        // Adaptez cette ligne selon votre structure de données 'Question'
-                        sw.WriteLine($"{quest.NomQuestion},{quest.BonneReponse},{quest.ReponseA};{quest.ReponseB};{quest.ReponseC}");
+                        sw.WriteLine("Question: " + quest.NomQuestion);
+                        sw.WriteLine("Options: A. " + quest.ReponseA + " B. " + quest.ReponseB + " C. " + quest.ReponseC);
+                        sw.WriteLine("Correct Answer: " + quest.BonneReponse);
+                        sw.WriteLine(); // Ajoute une ligne vide pour séparer les questions
                     }
                 }
             }
         }
-
-
     }
 }
