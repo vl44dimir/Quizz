@@ -219,5 +219,7 @@ namespace Quizz
                 prgTemps.Increment(1);
             }            
         }
+
+
     }
 }

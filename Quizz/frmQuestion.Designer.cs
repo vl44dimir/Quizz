@@ -45,34 +45,38 @@
             // lblQuestion
             // 
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Location = new System.Drawing.Point(75, 34);
+            this.lblQuestion.Location = new System.Drawing.Point(100, 42);
+            this.lblQuestion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(0, 13);
+            this.lblQuestion.Size = new System.Drawing.Size(0, 16);
             this.lblQuestion.TabIndex = 0;
             // 
             // cmdReponseA
             // 
-            this.cmdReponseA.Location = new System.Drawing.Point(44, 50);
+            this.cmdReponseA.Location = new System.Drawing.Point(59, 62);
+            this.cmdReponseA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmdReponseA.Name = "cmdReponseA";
-            this.cmdReponseA.Size = new System.Drawing.Size(116, 93);
+            this.cmdReponseA.Size = new System.Drawing.Size(155, 114);
             this.cmdReponseA.TabIndex = 1;
             this.cmdReponseA.UseVisualStyleBackColor = true;
             this.cmdReponseA.Click += new System.EventHandler(this.cmdReponseA_Click);
             // 
             // cmdReponseB
             // 
-            this.cmdReponseB.Location = new System.Drawing.Point(199, 50);
+            this.cmdReponseB.Location = new System.Drawing.Point(265, 62);
+            this.cmdReponseB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmdReponseB.Name = "cmdReponseB";
-            this.cmdReponseB.Size = new System.Drawing.Size(116, 93);
+            this.cmdReponseB.Size = new System.Drawing.Size(155, 114);
             this.cmdReponseB.TabIndex = 2;
             this.cmdReponseB.UseVisualStyleBackColor = true;
             this.cmdReponseB.Click += new System.EventHandler(this.cmdReponseB_Click);
             // 
             // cmdReponseC
             // 
-            this.cmdReponseC.Location = new System.Drawing.Point(349, 50);
+            this.cmdReponseC.Location = new System.Drawing.Point(465, 62);
+            this.cmdReponseC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmdReponseC.Name = "cmdReponseC";
-            this.cmdReponseC.Size = new System.Drawing.Size(116, 93);
+            this.cmdReponseC.Size = new System.Drawing.Size(155, 114);
             this.cmdReponseC.TabIndex = 3;
             this.cmdReponseC.UseVisualStyleBackColor = true;
             this.cmdReponseC.Click += new System.EventHandler(this.cmdReponseC_Click);
@@ -80,9 +84,10 @@
             // lblCat
             // 
             this.lblCat.AutoSize = true;
-            this.lblCat.Location = new System.Drawing.Point(75, 9);
+            this.lblCat.Location = new System.Drawing.Point(100, 11);
+            this.lblCat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCat.Name = "lblCat";
-            this.lblCat.Size = new System.Drawing.Size(0, 13);
+            this.lblCat.Size = new System.Drawing.Size(0, 16);
             this.lblCat.TabIndex = 4;
             // 
             // tmr1s
@@ -97,41 +102,45 @@
             // 
             // prgTemps
             // 
-            this.prgTemps.Location = new System.Drawing.Point(50, 212);
+            this.prgTemps.Location = new System.Drawing.Point(67, 261);
+            this.prgTemps.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.prgTemps.Name = "prgTemps";
-            this.prgTemps.Size = new System.Drawing.Size(415, 28);
+            this.prgTemps.Size = new System.Drawing.Size(553, 34);
             this.prgTemps.TabIndex = 5;
             // 
             // prgQuestion
             // 
-            this.prgQuestion.Location = new System.Drawing.Point(50, 283);
+            this.prgQuestion.Location = new System.Drawing.Point(67, 348);
+            this.prgQuestion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.prgQuestion.Name = "prgQuestion";
-            this.prgQuestion.Size = new System.Drawing.Size(415, 28);
+            this.prgQuestion.Size = new System.Drawing.Size(553, 34);
             this.prgQuestion.TabIndex = 6;
             // 
             // lblTemps
             // 
             this.lblTemps.AutoSize = true;
-            this.lblTemps.Location = new System.Drawing.Point(231, 187);
+            this.lblTemps.Location = new System.Drawing.Point(308, 230);
+            this.lblTemps.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTemps.Name = "lblTemps";
-            this.lblTemps.Size = new System.Drawing.Size(78, 13);
+            this.lblTemps.Size = new System.Drawing.Size(98, 16);
             this.lblTemps.TabIndex = 7;
             this.lblTemps.Text = "Barre du temps";
             // 
             // lblBQ
             // 
             this.lblBQ.AutoSize = true;
-            this.lblBQ.Location = new System.Drawing.Point(231, 267);
+            this.lblBQ.Location = new System.Drawing.Point(308, 329);
+            this.lblBQ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBQ.Name = "lblBQ";
-            this.lblBQ.Size = new System.Drawing.Size(100, 13);
+            this.lblBQ.Size = new System.Drawing.Size(127, 16);
             this.lblBQ.TabIndex = 8;
             this.lblBQ.Text = "Barre des questions";
             // 
             // frmQuestion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 341);
+            this.ClientSize = new System.Drawing.Size(667, 420);
             this.Controls.Add(this.lblBQ);
             this.Controls.Add(this.lblTemps);
             this.Controls.Add(this.prgQuestion);
@@ -141,6 +150,7 @@
             this.Controls.Add(this.cmdReponseB);
             this.Controls.Add(this.cmdReponseA);
             this.Controls.Add(this.lblQuestion);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmQuestion";
             this.Text = "Question";
             this.Load += new System.EventHandler(this.frmQuestion_Load);
