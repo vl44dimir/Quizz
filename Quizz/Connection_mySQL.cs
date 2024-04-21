@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using BCrypt.Net;
 
 namespace Quizz
 {
@@ -16,26 +14,21 @@ namespace Quizz
         private string uid;
         private string password;
 
-        //Constructor
         public Connection_mySQL()
         {
             Initialize();
         }
-
-        //Initialize values
+        // base de donné test
         private void Initialize()
         {
             server = "localhost";
             database = "Quizz";
             uid = "root";
             password = "";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
+            string connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
             connection = new MySqlConnection(connectionString);
         }
-
+        //Ouvrir la connection
         private bool OpenConnection()
         {
             try
@@ -45,17 +38,11 @@ namespace Quizz
             }
             catch (MySqlException ex)
             {
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
                 switch (ex.Number)
                 {
                     case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
+                        MessageBox.Show("Cannot connect to server. Contact administrator");
                         break;
-
                     case 1045:
                         MessageBox.Show("Invalid username/password, please try again");
                         break;
@@ -63,8 +50,7 @@ namespace Quizz
                 return false;
             }
         }
-
-        //Close connection
+        // fermer la connection
         private bool CloseConnection()
         {
             try
@@ -78,133 +64,148 @@ namespace Quizz
                 return false;
             }
         }
-
-        //Insert statement
-        public void InsertJoueur(string nomJoueur, int resultat)
+        //Ajouter un new user à la base de donné
+        public bool AddUser(string nomJoueur, string password)
         {
-            connection.Open();
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "INSERT INTO Joueurs (Pseudo, Score) VALUES (@Pseudo, @Score)";
-
-            // utilisation de l'objet contact passé en paramètre
-            cmd.Parameters.AddWithValue("@Pseudo", nomJoueur);
-            cmd.Parameters.AddWithValue("@Score", resultat);
-
-            // Exécution de la commande SQL
-            cmd.ExecuteNonQuery();
-
-            connection.Close();
-        }
-
-        public object TestPseudo(string nomJoueur)
-        {
-            connection.Open();
-
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            cmd.CommandText = "SELECT Pseudo FROM joueurs WHERE Pseudo LIKE '" + nomJoueur + "'";
-
-            object resultat = cmd.ExecuteScalar();
-
-            connection.Close();
-
-            return resultat;
-
-            
-        }
-        public void UpdateScore(string nomJoueur,int resultat)
-        {
-            connection.Open();
-            
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            cmd.CommandText = "UPDATE joueurs SET Score = " + resultat + " WHERE Pseudo LIKE '" + nomJoueur + "'";
-
-            cmd.ExecuteNonQuery();
-
-            connection.Close();
-        }
-
-        public int countCategorie()
-        {
-            int nombre;
-            object resultat;
-
-            connection.Open();
-
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            cmd.CommandText = "SELECT COUNT(Nom) FROM categories";
-
-            resultat = cmd.ExecuteScalar();
-
-            if (resultat!=null)
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+            if (OpenConnection())
             {
-                nombre = Convert.ToInt32(resultat);
+                MySqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = "INSERT INTO Joueurs (Pseudo, PASSWORD_USER) VALUES (@Pseudo, @Password)";
+                cmd.Parameters.AddWithValue("@Pseudo", nomJoueur);
+                cmd.Parameters.AddWithValue("@Password", passwordHash);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    CloseConnection();
+                }
             }
-            else
+            return false;
+        }
+        //Vérifier si l'user existe déjà en base de donné avant de l'insérer
+        public bool UserExists(string nomJoueur)
+        {
+            if (OpenConnection())
             {
-                 nombre = 0;
+                MySqlCommand cmd = connection.CreateCommand();
+                cmd.CommandText = "SELECT COUNT(*) FROM Joueurs WHERE Pseudo = @Pseudo";
+                cmd.Parameters.AddWithValue("@Pseudo", nomJoueur);
+
+                int userCount = Convert.ToInt32(cmd.ExecuteScalar());
+                CloseConnection();
+                return userCount > 0;
             }
+            return false;
+        }
+        //Vérifier le compte avant de lancé le quizz
+        public bool ValidateUser(string username, string password)
+        {
+            if (OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT PASSWORD_USER FROM Joueurs WHERE Pseudo = @Pseudo", connection);
+                cmd.Parameters.AddWithValue("@Pseudo", username);
 
-            return nombre;
-
-
+                try
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)  // Vérifiers que le résultat n'est pas null sinon on a une erreur quand on vérifie le sel du hash
+                    {
+                        string storedHash = result.ToString();
+                        if (!string.IsNullOrEmpty(storedHash) && BCrypt.Net.BCrypt.Verify(password, storedHash))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Aucun utilisateur trouvé avec ce pseudo.");
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
+            return false;
         }
 
+
+        // récupérer une liste de question
+        public List<Question> selectQuestion()
+        {
+            List<Question> lstQuestions = new List<Question>();
+
+            if (OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT Nom, Question, Reponse_1, Reponse_2, Reponse_3, Bonne FROM question INNER JOIN categories ON idCategories = Fkcategories ORDER BY idQuestion", connection);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Question quest = new Question();
+                        quest.Categories = reader["Nom"].ToString();
+                        quest.NomQuestion = reader["Question"].ToString();
+                        quest.ReponseA = reader["Reponse_1"].ToString();
+                        quest.ReponseB = reader["Reponse_2"].ToString();
+                        quest.ReponseC = reader["Reponse_3"].ToString();
+                        quest.BonneReponse = Convert.ToInt32(reader["Bonne"]);
+                        lstQuestions.Add(quest);
+                    }
+                }
+
+                CloseConnection();
+            }
+
+            return lstQuestions;
+        }
+        //Mettre à jours le tableau des scoores
+        public void UpdateScore(string pseudo, int score)
+        {
+            if (OpenConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("UPDATE Joueurs SET Score = @Score WHERE Pseudo = @Pseudo", connection);
+                cmd.Parameters.AddWithValue("@Score", score);
+                cmd.Parameters.AddWithValue("@Pseudo", pseudo);
+                cmd.ExecuteNonQuery();
+                CloseConnection();
+            }
+        }
+        //afficher liste des joueurs et leur scoores
         public List<Joueur> selectJoueur()
         {
             List<Joueur> lstJoueur = new List<Joueur>();
 
-            connection.Open();
-
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            cmd.CommandText = "SELECT Pseudo, Score FROM joueurs ORDER BY score DESC LIMIT 16";
-
-            MySqlDataReader j = cmd.ExecuteReader();
-
-            while (j.Read())
+            if (OpenConnection())
             {
-                Joueur joueurs = new Joueur();
-                joueurs.Pseudo = Convert.ToString(j[0]);
-                joueurs.Score = Convert.ToInt32(j[1]);
-                lstJoueur.Add(joueurs);
+                MySqlCommand cmd = new MySqlCommand("SELECT Pseudo, Score FROM Joueurs ORDER BY Score DESC", connection);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Joueur joueur = new Joueur();
+                        joueur.Pseudo = reader["Pseudo"].ToString();
+                        joueur.Score = Convert.ToInt32(reader["Score"]);
+                        lstJoueur.Add(joueur);
+                    }
+                }
+                CloseConnection();
             }
-            j.Close();
-            connection.Close();
             return lstJoueur;
-        }
-
-        public List<Question> selectQuestion()
-        {
-            List<Question> lstQuestions = new List<Question>();
-            connection.Open();
-            
-            
-            MySqlCommand cmd = this.connection.CreateCommand();
-
-            cmd.CommandText = "SELECT Nom,Question,Reponse_1,Reponse_2,Reponse_3,Bonne FROM question INNER JOIN categories ON idCategories = Fkcategories ORDER BY idQuestion";
-
-            MySqlDataReader question = cmd.ExecuteReader();
-            
-            while (question.Read())
-            {
-                Question quest = new Question();
-                quest.Categories = Convert.ToString(question[0]);
-                quest.NomQuestion = Convert.ToString(question[1]);
-                quest.ReponseA = Convert.ToString(question[2]);
-                quest.ReponseB = Convert.ToString(question[3]);
-                quest.ReponseC = Convert.ToString(question[4]);
-                quest.BonneReponse = Convert.ToInt32(question[5]);
-                lstQuestions.Add(quest);
-            }
-            question.Close();
-            connection.Close();
-            return lstQuestions;
         }
     }
 }

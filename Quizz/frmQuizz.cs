@@ -1,97 +1,132 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Quizz
 {
     public partial class frmQuizz : Form
     {
+        private Connection_mySQL connection;
+        private Joueur joueur;
 
-        Joueur joueur; 
+        //à L'init de la page
         public frmQuizz()
         {
             InitializeComponent();
-            cmdDebut.Enabled = false;
-            
-        }
+            connection = new Connection_mySQL();
+            joueur = new Joueur(); // Initialisation de l'objet joueur
+            LoadClassement();// Affiche le classement avec la fonction LoadClassement
 
+        }
+        // Créer un new compte user
         private void cmdAjouterLePseudo_Click(object sender, EventArgs e)
         {
-            object resultat;
-            Connection_mySQL bdd = new Connection_mySQL();
-            if (txtPseudo.Text != "")
+            string username = txtPseudo.Text.Trim();
+            string password = txtPassword.Text;
+
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                resultat = bdd.TestPseudo(txtPseudo.Text);
-                if (resultat == null)
+                if (!connection.UserExists(username))
                 {
-                    joueur = new Joueur();
-                    joueur.Pseudo = txtPseudo.Text;
-                    bdd.InsertJoueur(txtPseudo.Text, 0);
-                    cmdAjouterLePseudo.Enabled = false;
-                    cmdDebut.Enabled = true;
+                    bool isAdded = connection.AddUser(username, password);
+                    if (isAdded)
+                    {
+                        MessageBox.Show("Utilisateur ajouté avec succès !");
+                        txtPseudo.Clear();
+                        txtPassword.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de l'ajout de l'utilisateur.");
+                    }
                 }
                 else
                 {
-                    string message = "le pseudo " + txtPseudo.Text + " n'est plus disponible, merci de sélectionner un autre pseudo";
-                    string caption = "Pseudo invalide";
-                    MessageBoxButtons bouton = MessageBoxButtons.OK;
-                    MessageBox.Show(message, caption, bouton, MessageBoxIcon.Error);
+                    MessageBox.Show("Un utilisateur avec ce pseudo existe déjà.");
                 }
             }
             else
             {
-                string message = "merci de mettre un pseudo";
-                string caption = "Pseudo vide";
-                MessageBoxButtons bouton = MessageBoxButtons.OK;
-                MessageBox.Show(message, caption, bouton, MessageBoxIcon.Error);
+                MessageBox.Show("Veuillez remplir tous les champs.");
             }
-            
         }
-
+        //Lancer le quizz en vérifiant le compte avant
         private void cmdDebut_Click(object sender, EventArgs e)
         {
-            Connection_mySQL bdd = new Connection_mySQL();
+            string username = txtPseudo.Text.Trim();
+            string password = txtPassword.Text;
 
-            frmQuestion question = new frmQuestion(joueur);
-
-            question.ShowDialog();
-
-            bdd.UpdateScore(joueur.Pseudo, joueur.Score);
-            txtPseudo.Text = "";
-            List<Joueur> lstJoueur = bdd.selectJoueur();
-
-            if (lstJoueur.Count > 0)
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                lstClassement.Items.Clear();
-                foreach (Joueur j in lstJoueur)
+                if (connection.ValidateUser(username, password))
                 {
-                    lstClassement.Items.Add(j.ToString());
+                    frmQuestion question = new frmQuestion(joueur);
+                    question.ShowDialog();
+
+                    Connection_mySQL bdd = new Connection_mySQL();
+                    bdd.UpdateScore(joueur.Pseudo, joueur.Score);
+                    List<Joueur> lstJoueur = bdd.selectJoueur();
+
+                    if (lstJoueur.Count > 0)
+                    {
+                        Classement.Items.Clear();
+                        foreach (Joueur j in lstJoueur)
+                        {
+                            Classement.Items.Add(j.ToString());
+                        }
+                    }
+                    lstJoueur.Clear();
+                    cmdAjouterLePseudo.Enabled = true;
+                    cmdDebut.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Le pseudo ou le mot de passe est incorrect.");
                 }
             }
-            lstJoueur.Clear();
-            cmdAjouterLePseudo.Enabled = true;
-            cmdDebut.Enabled = false;
+            else
+            {
+                MessageBox.Show("Veuillez saisir le pseudo et le mot de passe.");
+            }
         }
 
+        //Charger le quizz et mettre à jour liste des joueurs
         private void frmQuizz_Load(object sender, EventArgs e)
         {
-            Connection_mySQL bdd = new Connection_mySQL();
-            List<Joueur> lstJoueur =  bdd.selectJoueur();
-
+            List<Joueur> lstJoueur = connection.selectJoueur();
             if (lstJoueur.Count > 0)
             {
-                lstClassement.Items.Clear();
+                Classement.Items.Clear();
                 foreach (Joueur j in lstJoueur)
                 {
-                    lstClassement.Items.Add(j.ToString());
+                    Classement.Items.Add(j.ToString());
                 }
             }
+        }
+
+        //Afficher le scoore des anciennes parties
+        private void LoadClassement()
+        {
+            Classement.Items.Clear();  //nom de la ListBox 
+
+            List<Joueur> lstJoueur = connection.selectJoueur();
+            if (lstJoueur.Count > 0)
+            {
+                foreach (Joueur j in lstJoueur)
+                {
+                    string displayText = $"{j.Pseudo} - Score: {j.Score}";
+                    Classement.Items.Add(displayText);
+                }
+            }
+            else
+            {
+                Classement.Items.Add("Aucun joueur trouvé.");
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

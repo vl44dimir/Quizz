@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Quizz"
   ],
-  "SelectedNode": "\\Quizz.sln",
+  "SelectedNode": "\\Quizz\\frmQuestion.Designer.cs",
   "PreviewInSolutionExplorer": false
 }
