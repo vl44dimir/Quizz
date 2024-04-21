@@ -28,11 +28,12 @@ namespace Quizz
         int countTimer1s = 0;
         List<Question> lstquest;
         Joueur joueur;
-        public frmQuestion(Joueur joueur)
+        string categorie;
+        public frmQuestion(Joueur joueur, string categorie)
         {
             InitializeComponent();
             Connection_mySQL bdd = new Connection_mySQL();
-            lstquest = bdd.selectQuestion();
+            lstquest = bdd.selectQuestion(categorie);
             nombreQuestionTotal = lstquest.Count();
             prgTemps.Visible = true;
             prgTemps.Minimum = 0;
@@ -45,6 +46,11 @@ namespace Quizz
             prgQuestion.Value = 0;
             prgQuestion.Step = 1;
             this.joueur = joueur;
+            this.categorie = categorie;
+        }
+        public int NombreQuestionTotal
+        {
+            get { return nombreQuestionTotal; }
         }
 
         private void frmQuestion_Load(object sender, EventArgs e)
